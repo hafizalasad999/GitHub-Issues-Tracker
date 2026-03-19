@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 ### **API Endpoints:**
 ###  **All Issues:** 
@@ -16,3 +17,6 @@
 
 
 ---
+=======
+# GitHub-Issues-Tracker
+>>>>>>> 64ea19bcbcdb9bc024ad9d2a9a1a526ba1e07c3e
