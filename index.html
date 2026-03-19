@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Page</title>
+    <!-- Tailwind & Daisy UI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- css -> add -->
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        .fonts {
+            font-family: "Geist", sans-serif;
+        }
+
+        ;
+    </style>
+</head>
+
+<body class="fonts">
+    <header class="w-11/12 mx-auto">
+        <div class="navbar bg-white">
+            <div class="flex-2">
+                <div class="flex">
+                    <img class="w-9" src="./assets/github-logo.png" alt="">
+                    <a class="btn btn-ghost text-xl font-semibold">GitHub Issues Tracker</a>
+                </div>
+            </div>
+            <div class="md:flex gap-2 hidden">
+                <input id="serchBtn" type="text" placeholder="Search issues..." class="input input-bordered w-30 md:w-auto" />
+                <button class="btn btn-primary">
+                    <span><i class="fa-solid fa-plus"></i></span>
+                    New Issue
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="w-11/15 mx-auto mt-[60px]">
+        <!-- button -->
+        <div class="gap-2 grid-cols-1 md:grid-cols-3">
+            <button id="allBtn" class="btn btn-outline btn-primary mt-2 w-full md:w-[120px] btn-active">All</button>
+            <button id="openBtn" class="btn btn-outline btn-primary mt-2 w-full md:w-[120px]">Open</button>
+            <button id="closedBtn" class="btn btn-outline btn-primary mt-2 w-full md:w-[120px]">Closed</button>
+        </div>
+        <!-- Issues section -->
+        <section class="p-6 flex justify-between mt-4">
+            <div class="flex gap-2">
+                <div class="bg-[#ECE4FF] w-[50px] h-[50px] rounded-full justify-center items-center flex">
+                    <img src="./assets/Aperture.png" alt="">
+                </div>
+                <div class="">
+                    <h3 class="font-semibold text-2xl"><span id="issuesCound">0</span> <span>Issues</span></h3>
+                    <p class="text-[#64748B]">Track and manage your project issues</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="flex justify-center items-center gap-2">
+                    <div class="bg-[#00A96E] w-3 h-3 rounded-full"></div>
+                    <h4 class="font-medium">Open</h4>
+                </div>
+                <div class="flex justify-center items-center gap-2">
+                    <div class="bg-[#A855F7] w-3 h-3 rounded-full"></div>
+                    <h4 class="font-medium">Closed</h4>
+                </div>
+            </div>
+        </section>
+        <!-- card Section -->
+        <section id="card-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-6">
+        </section>
+        <!-- loading sering -->
+         <div id="loading" class="justify-center items-center hidden">
+            <span class="loading loading-dots loading-xl"></span>
+         </div>
+         <!-- modal section -->
+        <section>
+            <!-- Open the modal using ID.showModal() method -->
+            <dialog id="selectedIssueModal" class="modal px-8 py-8">
+                <div class="modal-box space-y-2">
+                    <h3 id="title" class="text-lg font-bold">Fix broken image uploads</h3>
+                    <div class="flex justify-center items-center space-x-2 text-[#64748B]">
+                        <p id="" class="badge badge-success text[12px] font-medium text-white">Opened</p>
+                        <div class="w-2 h-2 rounded-full bg-[#64748B]"></div>
+                        <p id="">Opened by Fahim Ahmed</p>
+                        <div class="w-2 h-2 rounded-full bg-[#64748B]"></div>
+                        <p id="">22/02/2026</p>
+                    </div>
+                     <div class="flex gap-1 mt-3">
+                        <span class="bg-[#FEECEC] px-2 py-2 rounded-full border-2 border-[#FECACA] text-[#EF4444] badge">
+                            <i class="fa-solid fa-bug"></i>
+                            Bug
+                        </span>
+
+                        <span class="badge text-[12px] bg-[#FDE68A] px-2 py-2 rounded-full border-2 border-[#FECACA] text-[#EF4444]">
+                            <img src="./assets/help_wanted.png" alt="">
+                            help wanted
+                        </span>
+                    </div>
+                    <p id="description">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.</p>
+                    <div class="flex justify-between">
+                        <div class="">
+                            <p>Assignee:</p>
+                            <h3 id="">Fahim Ahmed</h3>
+                        </div>
+                        <div class="">
+                            <p>Priority:</p>
+                            <h3 id="" class="bg-[#FEECEC] px-6 py-2 rounded-full badge badge-warning">High</h3>
+                        </div>
+                    </div>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn btn-outline btn-primary">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+        </section>
+    </main>
+    <script src="./script/index.js"></script>
+    <script
+src="./script/homePage.js"></script>
+</body>
+
+</html>
